@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.stream.Collectors;
 
 public class App
 {
@@ -29,17 +30,15 @@ public class App
             PrintWriter out = new PrintWriter(socket.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            //communication with the client
-            System.out.println(in.readLine());
-            out.println("Hi, I'm the server !");
-            out.println("Nice to meet you !");
-            out.flush();
+            //get the json instance
+            Serialization json = SerializationImpl.getInstance();
 
-            // close all
-            in.close();
-            out.close();
-            serverSocket.close();
-            socket.close();
+            //communication with the client
+            while (true) {
+                String jsonData = in.lines().collect(Collectors.joining());
+                System.out.println(jsonData);
+                Request request = (Request) json.read(jsonData);
+            }
 
         }catch (IOException e) {
             e.printStackTrace();

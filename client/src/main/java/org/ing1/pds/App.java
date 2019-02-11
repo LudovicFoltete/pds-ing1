@@ -29,11 +29,17 @@ public class App
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream());
 
+            //read the request
+            Request request = new Request();
+            View.getInstance().readConsole(request);
+
+            //convert Request to json string
+            Serialization json = SerializationImpl.getInstance();
+            json.write(out, request);
+
             // communication with the client
-            out.println("Hi ! I'm the client !");
             out.flush();
-            System.out.println(in.readLine());
-            System.out.println(in.readLine());
+            System.out.println("Completed");
 
             // close all
             in.close();

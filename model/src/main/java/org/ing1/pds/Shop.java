@@ -1,8 +1,6 @@
 package org.ing1.pds;
 
-import java.io.Serializable;
-
-public class Shop implements Serializable {
+public class Shop {
 
     private int id;
     private String name;
