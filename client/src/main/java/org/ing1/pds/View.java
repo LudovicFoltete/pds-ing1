@@ -23,11 +23,9 @@ public class View {
                 Class c = Class.forName("org.ing1.pds."+words[1]);
                 Field[] fields = c.getDeclaredFields();
                 String[] values = new String[fields.length];
-                int i = 0;
-                for (Field f : fields) {
-                    System.out.print(f.getName() + " : ");
+                for (int i = 1; i < fields.length; i++) {
+                    System.out.print(fields[i].getName() + " : ");
                     values[i] = sc.nextLine();
-                    i++;
                 }
                 Controller.getInstance().add(words[1], values, request);
             } catch (ClassNotFoundException e) {

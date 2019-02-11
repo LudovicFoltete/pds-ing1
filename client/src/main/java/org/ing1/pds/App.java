@@ -29,22 +29,21 @@ public class App
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream());
 
-            //read the request
+            //init the request
             Request request = new Request();
-            View.getInstance().readConsole(request);
 
-            //convert Request to json string
-            Serialization json = SerializationImpl.getInstance();
-            json.write(out, request);
+            while (true) {
+                //read the request
+                View.getInstance().readConsole(request);
 
-            // communication with the client
-            out.flush();
-            System.out.println("Completed");
+                //convert Request to json string
+                Serialization json = SerializationImpl.getInstance();
+                json.write(out, request);
 
-            // close all
-            in.close();
-            out.close();
-            socket.close();
+                // communication with the client
+                out.flush();
+                System.out.println("Completed");
+            }
 
         }catch (UnknownHostException e) {
             e.printStackTrace();

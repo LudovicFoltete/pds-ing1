@@ -32,12 +32,16 @@ public class App
 
             //get the json instance
             Serialization json = SerializationImpl.getInstance();
+            String line = "";
+            String jsonData = "";
 
             //communication with the client
             while (true) {
-                String jsonData = in.lines().collect(Collectors.joining());
-                System.out.println(jsonData);
-                Request request = (Request) json.read(jsonData);
+                while ((line = in.readLine()) != null) {
+                    System.out.println(line);
+                    jsonData = jsonData + "\n" + line;
+                }
+                Request request = json.read(jsonData);
             }
 
         }catch (IOException e) {
