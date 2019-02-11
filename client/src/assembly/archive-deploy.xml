@@ -6,9 +6,9 @@
     <id>archive-deploy</id>
 
     <!-- Les formats d'archive à générer -->
-    <!--<formats>
+    <formats>
         <format>tar.gz</format>
-    </formats> -->
+    </formats>
 
     <!-- lib : dépendances + JAR server -->
     <dependencySets>
