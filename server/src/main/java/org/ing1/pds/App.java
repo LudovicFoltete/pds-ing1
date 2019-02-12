@@ -38,19 +38,18 @@ public class App
 
             //communication with the client
             while (true) {
-                while ((line = in.readLine()) != null) {
+                while (!(line = in.readLine()).equals("end")) {
                     System.out.println(line);
                     jsonData = jsonData + "\n" + line;
                 }
-
                 //write json into java object
                 Request request = json.read(jsonData);
                 Response response = executeRequest(request);
 
                 //write response into json
-                json.write(out, request);
+                json.write(out, response);
+                out.println("\nend");
                 out.flush();
-
                 jsonData = in.readLine();
             }
 

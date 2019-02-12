@@ -42,13 +42,17 @@ public class App
                 Serialization json = SerializationImpl.getInstance();
                 json.write(out, request);
 
-                // communication with the client
+                // communication with the server
+                out.println("\nend");
                 out.flush();
                 System.out.println("Completed");
 
-                while ((line = in.readLine()) != null) {
+                line = in.readLine();;
+
+                while (!line.equals("end")) {
                     System.out.println(line);
                     jsonData = jsonData + "\n" + line;
+                    line = in.readLine();
                 }
             }
 

@@ -22,9 +22,9 @@ public class View {
             try {
                 Class c = Class.forName("org.ing1.pds."+words[1]);
                 Field[] fields = c.getDeclaredFields();
-                String[] values = new String[fields.length];
-                for (int i = 1; i < fields.length; i++) {
-                    System.out.print(fields[i].getName() + " : ");
+                String[] values = new String[fields.length - 1];
+                for (int i = 0; i < fields.length-1; i++) {
+                    System.out.print(fields[i+1].getName() + " : ");
                     values[i] = sc.nextLine();
                 }
                 Controller.getInstance().add(words[1], values, request);

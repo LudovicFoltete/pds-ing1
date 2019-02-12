@@ -8,20 +8,23 @@ import java.util.List;
 
 public class ConnectionPool {
 
-    private static ConnectionPool ourInstance = new ConnectionPool();
-    private static int INITIAL_POOL_SIZE = 2;
+    private static String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
+    private static ConnectionPool ourInstance = new ConnectionPool(2);
     private String url = "jdbc:mysql://192.168.10.2:3306/mall";
     private String user = "pds";
     private String password = "pds";
-    private List<Connection> connectionPool = new ArrayList<>(INITIAL_POOL_SIZE);
+    private List<Connection> connectionPool = new ArrayList<>();
     private List<Connection> usedConnections = new ArrayList<>();
 
-    private ConnectionPool() {
-        for (int i = 0; i < INITIAL_POOL_SIZE; i++) {
+    private ConnectionPool(int poolSize) {
+        for (int i = 0; i < poolSize; i++) {
             try {
+                Class.forName(DRIVER_NAME);
                 connectionPool.add(DriverManager.getConnection(url, user, password));
             } catch (SQLException e) {
                 e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                System.err.println(DRIVER_NAME + " does not exist");
             }
         }
     }

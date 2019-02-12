@@ -17,6 +17,6 @@ public class Controller {
 
     public void show(String entity, Request request) {
         request.setType("show");
-        request.setType(entity);
+        request.setEntity(entity);
     }
 }
