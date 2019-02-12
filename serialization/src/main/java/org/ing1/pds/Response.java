@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Response {
 
     private String entity;
-    private ArrayList<Object> javaBeans;
+    private ArrayList<Shop> javaBeans;
 
 
     public String getEntity() {
@@ -16,11 +16,11 @@ public class Response {
         this.entity = entity;
     }
 
-    public ArrayList<Object> getJavaBeans() {
+    public ArrayList<Shop> getJavaBeans() {
         return javaBeans;
     }
 
-    public void setJavaBeans(ArrayList<Object> javaBeans) {
+    public void setJavaBeans(ArrayList<Shop> javaBeans) {
         this.javaBeans = javaBeans;
     }
 }

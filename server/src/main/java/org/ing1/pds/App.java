@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class App
@@ -41,11 +42,36 @@ public class App
                     System.out.println(line);
                     jsonData = jsonData + "\n" + line;
                 }
+
+                //write json into java object
                 Request request = json.read(jsonData);
+                Response response = executeRequest(request);
+
+                //write response into json
+                json.write(out, request);
+                out.flush();
+
+                jsonData = in.readLine();
             }
 
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Response executeRequest(Request request) {
+        Response response = new Response();
+        if (request.getEntity().equals("Shop")) {
+            response.setEntity("Shop");
+            if (request.getType().equals("show")) {
+                response.setJavaBeans(DAO.getInstance().getShops());
+                return response;
+            }
+            else if (request.getType().equals("add")) {
+                DAO.getInstance().addShop((request.getValues()));
+                return response;
+            }
+        }
+        return null;
     }
 }

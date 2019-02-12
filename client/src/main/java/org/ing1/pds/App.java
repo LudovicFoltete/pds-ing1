@@ -14,6 +14,8 @@ public class App
     {
         Socket socket;
         int port = 2121;
+        String line;
+        String jsonData = "";
 
         InetAddress serverAddress;
 
@@ -43,6 +45,11 @@ public class App
                 // communication with the client
                 out.flush();
                 System.out.println("Completed");
+
+                while ((line = in.readLine()) != null) {
+                    System.out.println(line);
+                    jsonData = jsonData + "\n" + line;
+                }
             }
 
         }catch (UnknownHostException e) {
