@@ -6,16 +6,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class App
 {
     public static void main( String[] args )
     {
-        Socket socket;
         int port = 2121;
         String line;
-        String jsonData = "";
 
         InetAddress serverAddress;
 
@@ -24,7 +21,7 @@ public class App
             serverAddress = InetAddress.getByName("firewall");
 
             // request a connection to the server
-            socket = new Socket(serverAddress, port);
+            Socket socket = new Socket(serverAddress, port);
             System.out.println("Connected !");
 
             // get the input and output streams for this socket
@@ -47,17 +44,10 @@ public class App
                 out.flush();
                 System.out.println("Completed");
 
-                line = in.readLine();;
-
-                while (!line.equals("end")) {
+                while (!(line = in.readLine()).equals("end")) {
                     System.out.println(line);
-                    jsonData = jsonData + "\n" + line;
-                    line = in.readLine();
                 }
             }
-
-        }catch (UnknownHostException e) {
-            e.printStackTrace();
 
         } catch (IOException e) {
             e.printStackTrace();
