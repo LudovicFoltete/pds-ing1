@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -jar ../lib/server-1.1.jar
+java -jar ../lib/server-1.2.jar

@@ -11,7 +11,7 @@
   <!-- ===== Informations Maven ===== -->
   <groupId>org.ing1.pds</groupId>
   <artifactId>parent</artifactId>
-  <version>1.1</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
 
   <!-- ===== Informations générales ===== -->
@@ -48,27 +48,27 @@
       <dependency>
         <groupId>org.ing1.pds</groupId>
         <artifactId>client</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>org.ing1.pds</groupId>
         <artifactId>server</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>org.ing1.pds</groupId>
         <artifactId>dao</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>org.ing1.pds</groupId>
         <artifactId>model</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
       </dependency>
       <dependency>
         <groupId>org.ing1.pds</groupId>
         <artifactId>serialization</artifactId>
-        <version>1.1</version>
+        <version>1.2</version>
       </dependency>
 
       <!-- ==== Bibliothèques tierces ==== -->
