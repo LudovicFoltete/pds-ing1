@@ -2,25 +2,24 @@ package org.ing1.pds;
 
 import java.util.ArrayList;
 
-public class Response {
+class Response {
 
-    private String entity;
-    private ArrayList<Shop> javaBeans;
+    private String code;
+    private ArrayList<Shop> shops;
 
-
-    public String getEntity() {
-        return entity;
+    String getCode() {
+        return code;
     }
 
-    public void setEntity(String entity) {
-        this.entity = entity;
+    void setCode(String code) {
+        this.code = code;
     }
 
-    public ArrayList<Shop> getJavaBeans() {
-        return javaBeans;
+    ArrayList<Shop> getShops() {
+        return shops;
     }
 
-    public void setJavaBeans(ArrayList<Shop> javaBeans) {
-        this.javaBeans = javaBeans;
+    void setShops(ArrayList<Shop> shops) {
+        this.shops = shops;
     }
 }

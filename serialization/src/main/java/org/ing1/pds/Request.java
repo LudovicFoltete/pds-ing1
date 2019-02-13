@@ -1,6 +1,6 @@
 package org.ing1.pds;
 
-public class Request {
+class Request {
 
     private String type;
     private String entity;
@@ -8,35 +8,35 @@ public class Request {
     private String[] values;
 
 
-    public String getType() {
+    String getType() {
         return type;
     }
 
-    public void setType(String type) {
+    void setType(String type) {
         this.type = type;
     }
 
-    public String getEntity() {
+    String getEntity() {
         return entity;
     }
 
-    public void setEntity(String entity) {
+    void setEntity(String entity) {
         this.entity = entity;
     }
 
-    public String[] getFields() {
+    String[] getFields() {
         return fields;
     }
 
-    public void setFields(String[] fields) {
+    void setFields(String[] fields) {
         this.fields = fields;
     }
 
-    public String[] getValues() {
+    String[] getValues() {
         return values;
     }
 
-    public void setValues(String[] values) {
+    void setValues(String[] values) {
         this.values = values;
     }
 }

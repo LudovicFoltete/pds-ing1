@@ -3,20 +3,16 @@ package org.ing1.pds;
 import java.lang.reflect.Field;
 import java.util.Scanner;
 
-public class View {
+class View {
 
     private static View ourInstance = new View();
     private Scanner sc = new Scanner(System.in);
 
-    public static View getInstance() { return ourInstance; }
+    static View getInstance() { return ourInstance; }
 
     private View() {}
 
-    public void display(String text) {
-        System.out.println(text);
-    }
-
-    public void readConsole(Request request) {
+    void readConsole(Request request) {
         String[] words = sc.nextLine().split(" ");
         if (words[0].equals("add")) {
             try {

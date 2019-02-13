@@ -59,13 +59,14 @@ public class App
         DAO dao = DAOImpl.getInstance();
 
         if (request.getEntity().equals("Shop")) {
-            response.setEntity("Shop");
             if (request.getType().equals("show")) {
-                response.setJavaBeans(dao.getShops());
+                response.setShops(dao.getShops());
+                response.setCode(dao.getCode());
                 return response;
             }
             else if (request.getType().equals("add")) {
                 dao.saveShop((request.getValues()));
+                response.setCode(dao.getCode());
                 return response;
             }
         }
