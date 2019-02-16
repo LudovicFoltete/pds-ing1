@@ -11,12 +11,15 @@ public class App
 {
     public static void main( String[] args )
     {
-        int port = 2121;
         String line;
 
         InetAddress serverAddress;
 
         try {
+
+            //load the port from config.properties
+            int port = PropertiesLoader.getInstance().getPort();
+
             // get the firewall's IP address
             serverAddress = InetAddress.getByName("firewall");
 

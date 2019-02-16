@@ -8,20 +8,21 @@ import java.util.List;
 
 class ConnectionPool {
 
-    private static ConnectionPool ourInstance = new ConnectionPool(2);
+    private static ConnectionPool ourInstance = new ConnectionPool();
     private List<Connection> connectionPool = new ArrayList<>();
     private List<Connection> usedConnections = new ArrayList<>();
 
-    private ConnectionPool(int poolSize) {
-        for (int i = 0; i < poolSize; i++) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
+    private ConnectionPool() {
+        int nbConnection = PropertiesLoader.getInstance().getNbConnectionDatabase();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            for (int i = 0; i < nbConnection; i++) {
                 connectionPool.add(DriverManager.getConnection("jdbc:mysql://192.168.10.2:3306/mall", "pds", "pds"));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                System.err.println("Driver don't be found !");
             }
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver don't be found !");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

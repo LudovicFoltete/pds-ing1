@@ -7,14 +7,16 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class App
-{
+public class App {
+
     public static void main( String[] args )
     {
-        int port = 2121;
         String line;
 
         try {
+
+            //load the port from config.properties
+            int port = PropertiesLoader.getInstance().getPort();
 
             // server initialization on port specified
             ServerSocket serverSocket = new ServerSocket(port);
