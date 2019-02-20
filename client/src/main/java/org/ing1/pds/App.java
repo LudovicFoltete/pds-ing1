@@ -17,6 +17,8 @@ public class App
 
         try {
 
+            GUI.launchApp(args);
+
             //load the port from config.properties
             int port = PropertiesLoader.getInstance().getPort();
 

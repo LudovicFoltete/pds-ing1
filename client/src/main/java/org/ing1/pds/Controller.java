@@ -1,6 +1,6 @@
 package org.ing1.pds;
 
-class Controller {
+public class Controller {
     private static Controller ourInstance = new Controller();
 
     static Controller getInstance() {
