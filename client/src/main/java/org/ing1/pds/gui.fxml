@@ -7,21 +7,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ing1.pds.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ing1.pds.ShopMapping">
    <children>
       <SplitPane dividerPositions="0.9045226130653267" layoutX="70.0" layoutY="200.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView layoutX="14.0" layoutY="14.0" prefHeight="356.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="shopTable" layoutX="14.0" layoutY="14.0" prefHeight="356.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="70.0" resizable="false" text="ID" />
-                      <TableColumn prefWidth="109.0" resizable="false" text="NAME" />
-                        <TableColumn prefWidth="126.0" resizable="false" text="CATEGORY" />
-                        <TableColumn prefWidth="82.0" resizable="false" text="LOCATION" />
-                        <TableColumn prefWidth="63.0" text="PHONE" />
-                        <TableColumn prefWidth="115.0" resizable="false" text="E-MAIL" />
+                      <TableColumn fx:id="nameColumn" prefWidth="109.0" resizable="false" text="NAME" />
+                        <TableColumn fx:id="categoryColumn" prefWidth="126.0" resizable="false" text="CATEGORY" />
+                        <TableColumn fx:id="locationColumn" prefWidth="82.0" resizable="false" text="LOCATION" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="132.0" text="PHONE" />
+                        <TableColumn fx:id="emailColumn" prefWidth="148.0" resizable="false" text="E-MAIL" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -33,8 +31,11 @@
                <children>
                   <ButtonBar layoutX="73.0" layoutY="-10.0" prefHeight="44.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <buttons>
-                        <Button mnemonicParsing="false" text="Update" />
-                      <Button contentDisplay="CENTER" mnemonicParsing="false" text="Delete" />
+                        <Button mnemonicParsing="false" text="Select" />
+                        <Button contentDisplay="CENTER" layoutX="503.0" layoutY="14.0" mnemonicParsing="false" text="Update" />
+                        <Button layoutX="313.0" layoutY="14.0" mnemonicParsing="false" text="Delete" />
+                        <Button layoutX="218.0" layoutY="14.0" mnemonicParsing="false" text="Add" />
+                      <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#start" text="Start" />
                     </buttons>
                   </ButtonBar>
                </children>

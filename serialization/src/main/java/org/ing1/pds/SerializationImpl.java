@@ -31,7 +31,7 @@ public class SerializationImpl implements Serialization
         objectMapper.writeValue(out, javaBeans);
     }
 
-    public Request read(String jsonData) throws IOException {
-       return objectMapper.readValue(jsonData, Request.class);
+    public <T> T read(String jsonData, Class<T> c) throws IOException {
+       return objectMapper.readValue(jsonData, c);
     }
 }

@@ -41,7 +41,7 @@ public class App {
                     jsonData.append("\n").append(line);
                 }
                 //write json into java object
-                Request request = json.read(jsonData.toString());
+                Request request = json.read(jsonData.toString(), Request.class);
                 Response response = executeRequest(request);
 
                 //write response into json

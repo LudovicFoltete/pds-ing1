@@ -7,5 +7,5 @@ public interface Serialization {
 
     void write(Writer out, Object javaBeans) throws IOException;
 
-    Request read(String jsonData) throws IOException;
+    <T> T read(String jsonData, Class<T> c) throws IOException;
 }

@@ -1,5 +1,12 @@
 package org.ing1.pds;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,17 +14,17 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class App
+public class App extends Application
 {
+    static BufferedReader in;
+    static PrintWriter out;
+
+
     public static void main( String[] args )
     {
-        String line;
-
         InetAddress serverAddress;
 
         try {
-
-            GUI.launchApp(args);
 
             //load the port from config.properties
             int port = PropertiesLoader.getInstance().getPort();
@@ -30,32 +37,30 @@ public class App
             System.out.println("Connected !");
 
             // get the input and output streams for this socket
-            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            out = new PrintWriter(socket.getOutputStream());
 
-            //init the request
-            Request request = new Request();
-
-            while (true) {
-                //read the request
-                View.getInstance().readConsole(request);
-
-                //convert Request to json string
-                Serialization json = SerializationImpl.getInstance();
-                json.write(out, request);
-
-                // communication with the server
-                out.println("\nend");
-                out.flush();
-                System.out.println("Completed");
-
-                while (!(line = in.readLine()).equals("end")) {
-                    System.out.println(line);
-                }
-            }
+            launch(args);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws IOException {
+        primaryStage.setTitle("Shop Management");
+
+        BorderPane mainContainer = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        Scene scene = new Scene(mainContainer);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(App.class.getResource("gui.fxml"));
+        AnchorPane middleContainer = loader.load();
+        mainContainer.setCenter(middleContainer);
+        ShopMapping controller =loader.getController();
+        controller.setApp(this);
     }
 }

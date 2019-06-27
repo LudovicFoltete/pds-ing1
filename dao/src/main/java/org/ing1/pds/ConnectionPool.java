@@ -14,10 +14,11 @@ class ConnectionPool {
 
     private ConnectionPool() {
         int nbConnection = PropertiesLoader.getInstance().getNbConnectionDatabase();
+        System.out.println(nbConnection);
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             for (int i = 0; i < nbConnection; i++) {
-                connectionPool.add(DriverManager.getConnection("jdbc:mysql://192.168.10.2:3306/mall", "pds", "pds"));
+                connectionPool.add(DriverManager.getConnection("jdbc:mysql://192.168.10.2:3306/mall?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "pds", "pds"));
             }
         } catch (ClassNotFoundException e) {
             System.err.println("Driver don't be found !");
