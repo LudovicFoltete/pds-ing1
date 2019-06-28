@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface DAO {
 
-    void saveShop(String[] values);
+    void insertShop(String[] values);
 
     ArrayList<Shop> getShops();
 

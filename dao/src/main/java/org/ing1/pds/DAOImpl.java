@@ -19,7 +19,7 @@ public class DAOImpl implements DAO {
         return ourInstance;
     }
 
-    public void saveShop(String[] values) {
+    public void insertShop(String[] values) {
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
             ps = connection.prepareStatement("INSERT INTO Shop VALUES(NULL, ?, ?, ?, ?, ?)");
@@ -42,17 +42,20 @@ public class DAOImpl implements DAO {
         ArrayList<Shop> shops = new ArrayList<>();
         Connection connection = ConnectionPool.getInstance().getConnection();
         try {
-            ps = connection.prepareStatement("SELECT * FROM Shop");
+            ps = connection.prepareStatement("SELECT Shop.id, Shop.name, category, location_id, max_desired, min_desired, area FROM Shop LEFT JOIN Location ON Shop.id = Location.id");
             rs = ps.executeQuery();
             while (rs.next()) {
                 Shop shop = new Shop();
+                Location location = new Location();
                 int index = 1;
                 shop.setId(rs.getInt(index++));
                 shop.setName(rs.getString(index++));
                 shop.setCategory(rs.getString(index++));
-                shop.setLocation_id(rs.getInt(index++));
-                shop.setPhone(rs.getString(index++));
-                shop.setEmail(rs.getString(index));
+                location.setId(rs.getInt(index++));
+                shop.setMax_area(rs.getInt(index++));
+                shop.setMin_area(rs.getInt(index++));
+                location.setArea(rs.getInt(index++));
+                shop.setLocation(location);
                 shops.add(shop);
             }
             code = "100";

@@ -14,7 +14,6 @@ class ConnectionPool {
 
     private ConnectionPool() {
         int nbConnection = PropertiesLoader.getInstance().getNbConnectionDatabase();
-        System.out.println(nbConnection);
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             for (int i = 0; i < nbConnection; i++) {

@@ -19,6 +19,7 @@ public class App extends Application
     static BufferedReader in;
     static PrintWriter out;
 
+    ShopMapping controller;
 
     public static void main( String[] args )
     {
@@ -51,16 +52,20 @@ public class App extends Application
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Shop Management");
 
-        BorderPane mainContainer = FXMLLoader.load(getClass().getResource("menu.fxml"));
+        FXMLLoader menuLoader = new FXMLLoader();
+        menuLoader.setLocation(App.class.getResource("menu.fxml"));
+        BorderPane mainContainer = menuLoader.load();
         Scene scene = new Scene(mainContainer);
         primaryStage.setScene(scene);
+        ShopMenuMapping menuController = menuLoader.getController();
+        menuController.setApp(this);
         primaryStage.show();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.class.getResource("gui.fxml"));
         AnchorPane middleContainer = loader.load();
         mainContainer.setCenter(middleContainer);
-        ShopMapping controller =loader.getController();
+        controller = loader.getController();
         controller.setApp(this);
     }
 }

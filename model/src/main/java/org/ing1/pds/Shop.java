@@ -5,58 +5,33 @@ public class Shop {
     private int id;
     private String name;
     private String category;
-    private int location_id;
-    private String phone;
-    private String email;
+    private Location location;
+    private int max_area;
+    private int min_area;
 
-    public Shop() {
-    }
+    public Shop() { }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) { this.name = name; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getCategory() { return category; }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+    public void setCategory(String category) { this.category = category; }
 
-    public int getLocation_id() {
-        return location_id;
-    }
+    public Location getLocation() { return location; }
 
-    public void setLocation_id(int location_id) {
-        this.location_id = location_id;
-    }
+    public void setLocation(Location location) { this.location = location; }
 
-    public String getPhone() {
-        return phone;
-    }
+    public int getMax_area() { return max_area; }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
+    public void setMax_area(int max_area) { this.max_area = max_area; }
 
-    public String getEmail() {
-        return email;
-    }
+    public int getMin_area() { return min_area; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setMin_area(int min_area) { this.min_area = min_area; }
 }

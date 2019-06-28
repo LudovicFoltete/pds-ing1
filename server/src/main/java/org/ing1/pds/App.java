@@ -67,7 +67,7 @@ public class App {
                 return response;
             }
             else if (request.getType().equals("add")) {
-                dao.saveShop((request.getValues()));
+                dao.insertShop((request.getValues()));
                 response.setCode(dao.getCode());
                 return response;
             }

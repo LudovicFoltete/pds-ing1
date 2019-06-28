@@ -1,17 +1,17 @@
 package org.ing1.pds;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
 
 public class ShopMapping {
-
+    
     @FXML
     private TableView<Shop> shopTable;
     @FXML
@@ -19,11 +19,14 @@ public class ShopMapping {
     @FXML
     private TableColumn<Shop, String> categoryColumn;
     @FXML
-    private TableColumn<Shop, Number> locationColumn;
+    private Label idValue;
     @FXML
-    private TableColumn<Shop, String> phoneColumn;
+    private Label areaValue;
     @FXML
-    private TableColumn<Shop, String> emailColumn;
+    private Label minValue;
+    @FXML
+    private Label maxValue;
+
 
     private App app;
 
@@ -31,13 +34,25 @@ public class ShopMapping {
     private void initialize() {
         nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         categoryColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCategory()));
-        locationColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getLocation_id()));
-        phoneColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhone()));
-        emailColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
+        shopTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> initializeDescription(newValue));
     }
 
-    @FXML
-    public void start() {
+    private void initializeDescription(Shop s) {
+        idValue.setText("");
+        areaValue.setText("");
+        minValue.setText("");
+        maxValue.setText("");
+
+        if(s != null) {
+            idValue.setText(String.valueOf(s.getLocation().getId()));
+            areaValue.setText(String.valueOf(s.getLocation().getArea()));
+            minValue.setText(String.valueOf(s.getMin_area()));
+            maxValue.setText(String.valueOf(s.getMax_area()));
+        }
+    }
+
+    //call by the menu
+    public void select() {
 
         //init the request
         Request request = new Request();
