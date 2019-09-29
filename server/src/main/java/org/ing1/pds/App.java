@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class App {
 
@@ -72,6 +74,26 @@ public class App {
                 return response;
             }
         }
+        else if(request.getType().equals("run")) {
+            ArrayList<Shop> newShops = businessRules(dao.getShops());
+            response.setShops(newShops);
+            response.setCode(dao.getCode());
+            return response;
+        }
         return null;
+    }
+
+    private static ArrayList<Shop> businessRules(ArrayList<Shop> shops) {
+        ArrayList<Location> locations = DAOImpl.getInstance().getLocations();
+        for(Shop shop : shops ) {
+            for (Location location : locations) {
+                if(location.getArea() > shop.getMin_area() && location.getArea() < shop.getMax_area()) {
+                    shop.setLocation(location);
+                    locations.remove(location);
+                    System.out.println(location.getArea());
+                }
+            }
+        }
+        return shops;
     }
 }

@@ -11,7 +11,9 @@ import javafx.scene.control.TableView;
 import java.io.IOException;
 
 public class ShopMapping {
-    
+
+    Serialization json = SerializationImpl.getInstance();
+
     @FXML
     private TableView<Shop> shopTable;
     @FXML
@@ -52,31 +54,15 @@ public class ShopMapping {
     }
 
     //call by the menu
-    public void select() {
-
+    public void run() {
         //init the request
         Request request = new Request();
-        String line;
-        StringBuilder jsonData = new StringBuilder();
 
         try {
-            request.setType("show");
-            request.setEntity("Shop");
+            request.setType("run");
+            request.setEntity("");
 
-            //convert Request to json string
-            Serialization json = SerializationImpl.getInstance();
-            json.write(App.out, request);
-
-            // communication with the server
-            App.out.println("\nend");
-            App.out.flush();
-            System.out.println("Completed");
-
-            while (!(line = App.in.readLine()).equals("end")) {
-                jsonData.append(line);
-            }
-
-            Response response = json.read(jsonData.toString(), Response.class);
+            Response response = json.read(communicate(request), Response.class);
             ObservableList<Shop> listShop = FXCollections.observableArrayList();
             listShop.addAll(response.getShops());
 
@@ -85,6 +71,45 @@ public class ShopMapping {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //call by the menu
+    public void select() {
+
+        //init the request
+        Request request = new Request();
+
+        try {
+            request.setType("show");
+            request.setEntity("Shop");
+
+            Response response = json.read(communicate(request), Response.class);
+            ObservableList<Shop> listShop = FXCollections.observableArrayList();
+            listShop.addAll(response.getShops());
+
+            shopTable.setItems(listShop);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String communicate(Request request) throws IOException {
+        String line = "";
+        StringBuilder jsonData = new StringBuilder();
+
+        //convert Request to json string
+        json.write(App.out, request);
+
+        // communication with the server
+        App.out.println("\nend");
+        App.out.flush();
+        System.out.println("Completed");
+
+        while (!(line = App.in.readLine()).equals("end")) {
+            jsonData.append(line);
+        }
+        return jsonData.toString();
     }
 
     public void setApp(App app) {

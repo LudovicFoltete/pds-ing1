@@ -8,5 +8,7 @@ public interface DAO {
 
     ArrayList<Shop> getShops();
 
+    ArrayList<Location> getLocations();
+
     String getCode();
 }

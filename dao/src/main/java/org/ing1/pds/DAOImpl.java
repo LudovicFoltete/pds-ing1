@@ -68,6 +68,29 @@ public class DAOImpl implements DAO {
         return shops;
     }
 
+    public ArrayList<Location> getLocations() {
+        ArrayList<Location> locations = new ArrayList<>();
+        Connection connection = ConnectionPool.getInstance().getConnection();
+        try {
+            ps = connection.prepareStatement("SELECT id, area FROM Location");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Location location = new Location();
+                int index = 1;
+                location.setId(rs.getInt(index++));
+                location.setArea(rs.getInt(index++));
+                locations.add(location);
+            }
+            code = "100";
+        } catch (SQLException e) {
+            e.printStackTrace();
+            code = "400";
+        } finally {
+            this.closeStatement(connection);
+        }
+        return locations;
+    }
+
     public String getCode() {
         return code;
     }

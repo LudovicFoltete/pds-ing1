@@ -15,4 +15,9 @@ public class ShopMenuMapping {
         app.controller.select();
     }
 
+    @FXML
+    public void run() {
+        System.out.println("Completed !");
+    }
+
 }
